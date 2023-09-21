@@ -3,6 +3,7 @@ FROM node:20-alpine AS jerbooru-node-base
 WORKDIR /app
 COPY . .
 RUN npm i
+RUN npx next telemetry disable
 EXPOSE 3000
 
 FROM jerbooru-node-base AS jerbooru-node-dev
