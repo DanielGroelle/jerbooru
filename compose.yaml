@@ -1,0 +1,52 @@
+services:
+  node-dev:
+    build:
+      context: .
+      target: jerbooru-node-dev
+    container_name: node-dev
+    image: jerbooru-node-dev
+    environment:
+      - HI=HI
+    ports:
+      - "3000:3000"
+
+  node-prod:
+    build:
+      context: .
+      target: jerbooru-node-prod
+    container_name: node-prod
+    image: jerbooru-node-prod
+    environment:
+      - HI=HI
+    ports:
+      - "3000:80"
+  
+  postgres-dev:
+    build:
+      context: .
+      target: jerbooru-postgres-dev
+    container_name: postgres-dev
+    image: jerbooru-postgres-dev
+    volumes:
+      - /var/lib/postgres
+    environment:
+      - POSTGRES_PASSWORD=HI
+      - POSTGRES_USER=HI
+      - POSTGRES_DB=HI
+    ports:
+      - "5432:2345"
+
+  postgres-prod:
+    build:
+      context: .
+      target: jerbooru-postgres-prod
+    container_name: postgres-prod
+    image: jerbooru-postgres-prod
+    volumes:
+      - /var/lib/postgres
+    environment:
+      - POSTGRES_PASSWORD=HI
+      - POSTGRES_USER=HI
+      - POSTGRES_DB=HI
+    ports:
+      - "5432:5432"
