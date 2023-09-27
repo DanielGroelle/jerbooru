@@ -3,8 +3,9 @@ services:
     build:
       context: .
       target: jerbooru-node-dev
-    container_name: node-dev
     image: jerbooru-node-dev
+    volumes:
+      - ./src:/app/src
     environment:
       - HI=HI
     ports:
@@ -14,7 +15,6 @@ services:
     build:
       context: .
       target: jerbooru-node-prod
-    container_name: node-prod
     image: jerbooru-node-prod
     environment:
       - HI=HI
@@ -25,10 +25,9 @@ services:
     build:
       context: .
       target: jerbooru-postgres-dev
-    container_name: postgres-dev
     image: jerbooru-postgres-dev
     volumes:
-      - /var/lib/postgres
+      - /var/lib/postgresql/data
     environment:
       - POSTGRES_PASSWORD=HI
       - POSTGRES_USER=HI
@@ -40,7 +39,6 @@ services:
     build:
       context: .
       target: jerbooru-postgres-prod
-    container_name: postgres-prod
     image: jerbooru-postgres-prod
     volumes:
       - /var/lib/postgres

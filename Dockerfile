@@ -1,12 +1,14 @@
 # frontend
 FROM node:20-alpine AS jerbooru-node-base
 WORKDIR /app
-COPY . .
+COPY ./package*.json ./
 RUN npm i
+COPY . .
 RUN npx next telemetry disable
 EXPOSE 3000
 
 FROM jerbooru-node-base AS jerbooru-node-dev
+RUN rm -rf src
 CMD npm run dev
 
 FROM jerbooru-node-base AS jerbooru-node-prod
